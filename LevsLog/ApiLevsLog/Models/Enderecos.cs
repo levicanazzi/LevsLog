@@ -11,6 +11,6 @@ namespace ApiLevsLog.Models
         public string Municipio { get; set; }
         public string Estado { get; set; }        
         public Orcamento Orcamento { get; set; }
-        public List<Cliente> Clientes { get; set; }
+        public Cliente Clientes { get; set; }
     }
 }
