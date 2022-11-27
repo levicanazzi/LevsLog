@@ -22,7 +22,7 @@ namespace ApiLevsLog.Controllers
         [HttpGet]
         public async Task<IActionResult> GetClientes()
         {
-            List<Cliente> clientes = await _dbContext.Clientes.ToListAsync();
+            List<Cliente> clientes = await _dbContext.Clientes.Include("Endereco").ToListAsync();
 
             if (clientes.Count == 0)
             {
@@ -35,7 +35,7 @@ namespace ApiLevsLog.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCliente(int id)
         {
-            Cliente cliente = await _dbContext.Clientes.FirstOrDefaultAsync(c => c.Id == id);
+            Cliente cliente = await _dbContext.Clientes.Include("Endereco").FirstOrDefaultAsync(c => c.Id == id);
 
             if (cliente == null)
             {
