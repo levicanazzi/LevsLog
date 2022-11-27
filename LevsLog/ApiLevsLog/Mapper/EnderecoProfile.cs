@@ -29,5 +29,23 @@ namespace ApiLevsLog.Mapper
 
             return enderecosDto;
         }
+
+        public static ReadEndereco ReadEnderecoById(Enderecos endereco)
+        {
+            ReadEndereco enderecoDto = new ReadEndereco();
+
+            enderecoDto.Id = endereco.Id;
+            enderecoDto.Logradouro = endereco.Logradouro;
+            enderecoDto.Numero = endereco.Numero;
+            enderecoDto.Cep = endereco.Cep;
+            enderecoDto.Municipio = endereco.Municipio;
+            enderecoDto.Estado = endereco.Estado;
+            enderecoDto.Nome = endereco.Cliente.Nome;
+            enderecoDto.Sobrenome = endereco.Cliente.Sobrenome;
+            enderecoDto.Email = endereco.Cliente.Email;
+            enderecoDto.DataNascimento = endereco.Cliente.DataNascimento;
+
+            return enderecoDto;
+        }
     }
 }

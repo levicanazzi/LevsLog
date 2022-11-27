@@ -45,7 +45,9 @@ namespace ApiLevsLog.Controllers
                 return NotFound();
             }
 
-            return Ok(endereco);
+            var enderecoDto = EnderecoProfile.ReadEnderecoById(endereco);
+
+            return Ok(enderecoDto);
         }
 
         [HttpPost]
