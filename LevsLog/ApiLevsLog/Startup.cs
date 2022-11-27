@@ -35,6 +35,7 @@ namespace ApiLevsLog
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(con));
 
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve); 
+            //services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiLevsLog", Version = "v1" });

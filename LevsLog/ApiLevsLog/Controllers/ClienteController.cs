@@ -1,5 +1,7 @@
 ﻿using ApiLevsLog.Data;
+using ApiLevsLog.Mapper;
 using ApiLevsLog.Models;
+using ApiLevsLog.Models.Dtos.ClienteDtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +31,9 @@ namespace ApiLevsLog.Controllers
                 return NotFound();
             }
 
-            return Ok(clientes);
+            var clientesDto = ClienteProfile.ClientesToReadClientes(clientes);
+
+            return Ok(clientesDto);
         }
 
         [HttpGet("{id}")]
