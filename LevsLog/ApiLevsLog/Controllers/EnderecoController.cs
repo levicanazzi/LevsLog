@@ -1,4 +1,5 @@
 ﻿using ApiLevsLog.Data;
+using ApiLevsLog.Mapper;
 using ApiLevsLog.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,9 @@ namespace ApiLevsLog.Controllers
                 return NotFound();
             }
 
-            return Ok(enderecos);
+            var enderecosDto = EnderecoProfile.EnderecosToReadEnderecos(enderecos);
+
+            return Ok(enderecosDto);
         }
 
         [HttpGet("{id}")]
