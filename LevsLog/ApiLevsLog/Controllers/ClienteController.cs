@@ -57,7 +57,9 @@ namespace ApiLevsLog.Controllers
             await _dbContext.Clientes.AddAsync(cliente);
             await _dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCliente), new { id = cliente.Id }, cliente);
+            var clienteDto = ClienteProfile.AddClientes(cliente);
+
+            return CreatedAtAction(nameof(GetCliente), new { id = cliente.Id }, clienteDto);
         }
 
         [HttpPut("{id}")]
@@ -79,7 +81,7 @@ namespace ApiLevsLog.Controllers
             cliente.Endereco.Estado = clienteDto.Endereco.Estado;
             cliente.Email = clienteDto.Email;
 
-            var clienteDto2 = ClienteProfile.UpdateCliente(cliente);
+            var clienteDto2 = ClienteProfile.UpdateClientes(cliente);
 
             await _dbContext.SaveChangesAsync();
 

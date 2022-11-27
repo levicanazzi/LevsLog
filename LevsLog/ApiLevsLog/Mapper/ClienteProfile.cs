@@ -48,7 +48,23 @@ namespace ApiLevsLog.Mapper
             return clienteDto;
         }
 
-        public static UpdateCliente UpdateCliente(Cliente cliente)
+        public static UpdateCliente UpdateClientes(Cliente cliente)
+        {
+            UpdateCliente clienteDto = new UpdateCliente();
+
+            clienteDto.Id = cliente.Id;
+            clienteDto.Nome = cliente.Nome;
+            clienteDto.Sobrenome = cliente.Sobrenome;
+            clienteDto.Logradouro = cliente.Endereco.Logradouro;
+            clienteDto.Numero = cliente.Endereco.Numero;
+            clienteDto.Cep = cliente.Endereco.Cep;
+            clienteDto.Municipio = cliente.Endereco.Municipio;
+            clienteDto.Estado = cliente.Endereco.Estado;
+            clienteDto.Email = cliente.Email;
+
+            return clienteDto;
+        }
+        public static UpdateCliente AddClientes(Cliente cliente)
         {
             UpdateCliente clienteDto = new UpdateCliente();
 
