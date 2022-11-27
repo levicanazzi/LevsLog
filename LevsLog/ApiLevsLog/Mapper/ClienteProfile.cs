@@ -29,5 +29,23 @@ namespace ApiLevsLog.Mapper
 
             return clientesDto;
         }
+
+        public static ReadCliente ReadClienteById(Cliente cliente)
+        {
+            ReadCliente clienteDto = new ReadCliente();
+
+            clienteDto.Id = cliente.Id;
+            cliente.Nome = clienteDto.Nome;
+            cliente.Sobrenome = clienteDto.Sobrenome;
+            cliente.Email = clienteDto.Email;
+            cliente.DataNascimento = clienteDto.DataNascimento;
+            cliente.Endereco.Logradouro = clienteDto.Logradouro;
+            cliente.Endereco.Numero = clienteDto.Numero;
+            cliente.Endereco.Cep = clienteDto.Cep;
+            cliente.Endereco.Municipio = clienteDto.Municipio;
+            cliente.Endereco.Estado = clienteDto.Estado;
+            
+            return clienteDto;
+        }
     }
 }

@@ -46,7 +46,9 @@ namespace ApiLevsLog.Controllers
                 return NotFound();
             }
 
-            return Ok(cliente);
+            var clientDto = ClienteProfile.ReadClienteById(cliente);
+
+            return Ok(clientDto);
         }
 
         [HttpPost]
