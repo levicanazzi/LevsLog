@@ -79,9 +79,11 @@ namespace ApiLevsLog.Controllers
             cliente.Endereco.Estado = clienteDto.Endereco.Estado;
             cliente.Email = clienteDto.Email;
 
+            var clienteDto2 = ClienteProfile.UpdateCliente(cliente);
+
             await _dbContext.SaveChangesAsync();
 
-            return Ok(cliente);
+            return Ok(clienteDto2);
         }
 
         [HttpDelete("{id}")]

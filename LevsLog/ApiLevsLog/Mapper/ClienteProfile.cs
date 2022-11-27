@@ -35,16 +35,33 @@ namespace ApiLevsLog.Mapper
             ReadCliente clienteDto = new ReadCliente();
 
             clienteDto.Id = cliente.Id;
-            cliente.Nome = clienteDto.Nome;
-            cliente.Sobrenome = clienteDto.Sobrenome;
-            cliente.Email = clienteDto.Email;
-            cliente.DataNascimento = clienteDto.DataNascimento;
-            cliente.Endereco.Logradouro = clienteDto.Logradouro;
-            cliente.Endereco.Numero = clienteDto.Numero;
-            cliente.Endereco.Cep = clienteDto.Cep;
-            cliente.Endereco.Municipio = clienteDto.Municipio;
-            cliente.Endereco.Estado = clienteDto.Estado;
-            
+            clienteDto.Nome = cliente.Nome;
+            clienteDto.Sobrenome = cliente.Sobrenome;
+            clienteDto.Email = cliente.Email;
+            clienteDto.DataNascimento = cliente.DataNascimento;
+            clienteDto.Logradouro = cliente.Endereco.Logradouro;
+            clienteDto.Numero = cliente.Endereco.Numero;
+            clienteDto.Cep = cliente.Endereco.Cep;
+            clienteDto.Municipio = cliente.Endereco.Municipio;
+            clienteDto.Estado = cliente.Endereco.Estado;
+
+            return clienteDto;
+        }
+
+        public static UpdateCliente UpdateCliente(Cliente cliente)
+        {
+            UpdateCliente clienteDto = new UpdateCliente();
+
+            clienteDto.Id = cliente.Id;
+            clienteDto.Nome = cliente.Nome;
+            clienteDto.Sobrenome = cliente.Sobrenome;
+            clienteDto.Logradouro = cliente.Endereco.Logradouro;
+            clienteDto.Numero = cliente.Endereco.Numero;
+            clienteDto.Cep = cliente.Endereco.Cep;
+            clienteDto.Municipio = cliente.Endereco.Municipio;
+            clienteDto.Estado = cliente.Endereco.Estado;
+            clienteDto.Email = cliente.Email;
+
             return clienteDto;
         }
     }
