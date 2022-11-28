@@ -52,14 +52,14 @@ namespace ApiLevsLog.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCliente([FromBody] Cliente cliente)
+        public async Task<IActionResult> AddCliente([FromBody] AddCliente clienteDto)
         {
+            var cliente = ClienteProfile.AddClientes(clienteDto);
+
             await _dbContext.Clientes.AddAsync(cliente);
             await _dbContext.SaveChangesAsync();
 
-            var clienteDto = ClienteProfile.AddClientes(cliente);
-
-            return CreatedAtAction(nameof(GetCliente), new { id = cliente.Id }, clienteDto);
+            return CreatedAtAction(nameof(GetCliente), new { id = cliente.Id }, cliente);
         }
 
         [HttpPut("{id}")]

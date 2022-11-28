@@ -1,4 +1,5 @@
-﻿using ApiLevsLog.Models;
+﻿using ApiLevsLog.Data;
+using ApiLevsLog.Models;
 using ApiLevsLog.Models.Dtos.ClienteDtos;
 using System.Collections.Generic;
 
@@ -64,21 +65,28 @@ namespace ApiLevsLog.Mapper
 
             return clienteDto;
         }
-        public static UpdateCliente AddClientes(Cliente cliente)
+        public static Cliente AddClientes(AddCliente clienteDto)
         {
-            UpdateCliente clienteDto = new UpdateCliente();
 
-            clienteDto.Id = cliente.Id;
-            clienteDto.Nome = cliente.Nome;
-            clienteDto.Sobrenome = cliente.Sobrenome;
-            clienteDto.Logradouro = cliente.Endereco.Logradouro;
-            clienteDto.Numero = cliente.Endereco.Numero;
-            clienteDto.Cep = cliente.Endereco.Cep;
-            clienteDto.Municipio = cliente.Endereco.Municipio;
-            clienteDto.Estado = cliente.Endereco.Estado;
-            clienteDto.Email = cliente.Email;
+            Enderecos endereco = new Enderecos()
+            {
+                Logradouro = clienteDto.Logradouro,
+                Numero = clienteDto.Numero,
+                Cep = clienteDto.Cep,
+                Municipio = clienteDto.Municipio,
+                Estado = clienteDto.Estado
+            };
 
-            return clienteDto;
+            Cliente cliente = new Cliente()
+            {
+                Id = clienteDto.Id,
+                Nome = clienteDto.Nome,
+                Sobrenome = clienteDto.Sobrenome,
+                Email = clienteDto.Email,
+                Endereco = endereco
+            };
+
+            return cliente;
         }
     }
 }

@@ -75,9 +75,11 @@ namespace ApiLevsLog.Controllers
             endereco.Municipio = enderecoDto.Municipio;
             endereco.Estado = enderecoDto.Estado;
 
+            var enderecoDto2 = EnderecoProfile.UpdateEndereco(endereco);
+
             await _dbContext.SaveChangesAsync();
 
-            return Ok(endereco);
+            return Ok(enderecoDto2);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarEndereco(int id)
