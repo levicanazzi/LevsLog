@@ -63,29 +63,22 @@ namespace ApiLevsLog.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpCliente(int id, [FromBody] Cliente clienteDto)
+        public async Task<IActionResult> UpCliente(int id,[FromBody] UpdateCliente clienteDto)
         {
-            Cliente cliente = await _dbContext.Clientes.Include("Endereco").FirstOrDefaultAsync(x => x.Id == id);
+            var cliente = await _dbContext.Clientes.Include("Endereco").FirstOrDefaultAsync(x => x.Id == id);
 
             if (cliente == null)
             {
                 return NotFound();
             }
 
-            cliente.Nome = clienteDto.Nome;
-            cliente.Sobrenome = clienteDto.Sobrenome;
-            cliente.Endereco.Logradouro = clienteDto.Endereco.Logradouro;
-            cliente.Endereco.Numero = clienteDto.Endereco.Numero;
-            cliente.Endereco.Cep = clienteDto.Endereco.Cep;
-            cliente.Endereco.Municipio = clienteDto.Endereco.Municipio;
-            cliente.Endereco.Estado = clienteDto.Endereco.Estado;
-            cliente.Email = clienteDto.Email;
-
-            var clienteDto2 = ClienteProfile.UpdateClientes(cliente);
+            cliente = ClienteProfile.UpdateClientes(clienteDto, cliente);
 
             await _dbContext.SaveChangesAsync();
 
-            return Ok(clienteDto2);
+            var clienteReadDto = ClienteProfile.ReadClienteById(cliente);
+
+            return Ok(clienteReadDto);
         }
 
         [HttpDelete("{id}")]
