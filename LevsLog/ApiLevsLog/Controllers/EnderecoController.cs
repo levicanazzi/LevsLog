@@ -1,6 +1,7 @@
 ﻿using ApiLevsLog.Data;
 using ApiLevsLog.Mapper;
 using ApiLevsLog.Models;
+using ApiLevsLog.Models.Dtos.EnderecoDtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -60,26 +61,22 @@ namespace ApiLevsLog.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpEndereco(int id, [FromBody] Enderecos enderecoDto)
+        public async Task<IActionResult> UpEndereco(int id, [FromBody] UpdateEndereco enderecoDto)
         {
-            Enderecos endereco = await _dbContext.Enderecos.FirstOrDefaultAsync(x => x.Id == id);
+            var endereco = await _dbContext.Enderecos.FirstOrDefaultAsync(x => x.Id == id);
 
             if (endereco == null)
             {
                 return NotFound();
             }
 
-            endereco.Logradouro = enderecoDto.Logradouro;
-            endereco.Numero = enderecoDto.Numero;
-            endereco.Cep = enderecoDto.Cep;
-            endereco.Municipio = enderecoDto.Municipio;
-            endereco.Estado = enderecoDto.Estado;
-
-            var enderecoDto2 = EnderecoProfile.UpdateEndereco(endereco);
+            endereco = EnderecoProfile.UpdateEndereco(enderecoDto, endereco);
 
             await _dbContext.SaveChangesAsync();
 
-            return Ok(enderecoDto2);
+            var enderecoReadDto = EnderecoProfile.ReadEnderecoById(endereco);
+
+            return Ok(enderecoReadDto);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarEndereco(int id)

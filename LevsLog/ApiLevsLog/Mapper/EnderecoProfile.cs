@@ -15,10 +15,10 @@ namespace ApiLevsLog.Mapper
                 enderecosDto.Add(new ReadEndereco()
                 {
                     Id = endereco.Id,
-                    Nome = endereco.Cliente.Nome,
-                    Sobrenome = endereco.Cliente.Sobrenome,
-                    Email = endereco.Cliente.Email,
-                    DataNascimento = endereco.Cliente.DataNascimento,
+                    //Nome = endereco.Cliente.Nome,
+                    //Sobrenome = endereco.Cliente.Sobrenome,
+                    //Email = endereco.Cliente.Email,
+                    //DataNascimento = endereco.Cliente.DataNascimento,
                     Logradouro = endereco.Logradouro,
                     Numero = endereco.Numero,
                     Cep = endereco.Cep,
@@ -40,30 +40,19 @@ namespace ApiLevsLog.Mapper
             enderecoDto.Cep = endereco.Cep;
             enderecoDto.Municipio = endereco.Municipio;
             enderecoDto.Estado = endereco.Estado;
-            enderecoDto.Nome = endereco.Cliente.Nome;
-            enderecoDto.Sobrenome = endereco.Cliente.Sobrenome;
-            enderecoDto.Email = endereco.Cliente.Email;
-            enderecoDto.DataNascimento = endereco.Cliente.DataNascimento;
 
             return enderecoDto;
         }
 
-        public static ReadEndereco UpdateEndereco(Enderecos endereco)
+        public static Enderecos UpdateEndereco(UpdateEndereco enderecoDto, Enderecos endereco)
         {
-            ReadEndereco enderecoDto = new ReadEndereco();
+            endereco.Logradouro = enderecoDto.Logradouro;
+            endereco.Numero = enderecoDto.Numero;
+            endereco.Cep = enderecoDto.Cep;
+            endereco.Municipio = enderecoDto.Municipio;
+            endereco.Estado = enderecoDto.Estado;
 
-            enderecoDto.Id = endereco.Id;
-            enderecoDto.Logradouro = endereco.Logradouro;
-            enderecoDto.Numero = endereco.Numero;
-            enderecoDto.Cep = endereco.Cep;
-            enderecoDto.Municipio = endereco.Municipio;
-            enderecoDto.Estado = endereco.Estado;
-            enderecoDto.Nome = endereco.Cliente.Nome;
-            enderecoDto.Sobrenome = endereco.Cliente.Sobrenome;
-            enderecoDto.Email = endereco.Cliente.Email;
-            enderecoDto.DataNascimento = endereco.Cliente.DataNascimento;
-
-            return enderecoDto;
+            return endereco;
         }
     }
 }
