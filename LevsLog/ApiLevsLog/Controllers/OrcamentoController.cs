@@ -67,5 +67,21 @@ namespace ApiLevsLog.Controllers
 
             return CreatedAtAction(nameof(GetOrcamento), new { id = orcamento.Id }, orcamento);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletarOrcamento(int id)
+        {
+            Orcamento orcamento = await _dbContext.Orcamentos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (orcamento == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Remove(orcamento);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
