@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiLevsLog.Models
 {
@@ -7,6 +8,6 @@ namespace ApiLevsLog.Models
         [Key]
         public int Id { get; set; }
         public string Servico { get; set; }
-        public virtual Orcamento Orcamento { get; set; }
+        public virtual List<Orcamento> Orcamento { get; set; }
     }
 }

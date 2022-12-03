@@ -59,11 +59,13 @@ namespace ApiLevsLog.Controllers
             await _dbContext.Clientes.AddAsync(cliente);
             await _dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCliente), new { id = cliente.Id }, cliente);
+            var readCliente = ClienteProfile.ReadClienteById(cliente);
+
+            return CreatedAtAction(nameof(GetCliente), new { id = readCliente.Id }, readCliente);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpCliente(int id,[FromBody] UpdateCliente clienteDto)
+        public async Task<IActionResult> UpCliente(int id, [FromBody] UpdateCliente clienteDto)
         {
             var cliente = await _dbContext.Clientes.Include("Endereco").FirstOrDefaultAsync(x => x.Id == id);
 

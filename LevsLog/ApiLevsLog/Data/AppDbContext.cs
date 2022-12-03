@@ -20,13 +20,13 @@ namespace ApiLevsLog.Data
 
             modelBuilder.Entity<Orcamento>()
                 .HasOne(orcamento => orcamento.TipoServico)
-                .WithOne(tipoServico => tipoServico.Orcamento)
-                .HasForeignKey<Orcamento>(orcamento => orcamento.IdTipoServico);
+                .WithMany(tipoServico => tipoServico.Orcamento)
+                .HasForeignKey(orcamento => orcamento.IdTipoServico);
 
             modelBuilder.Entity<Orcamento>()
                 .HasOne(orcamento => orcamento.Endereco)
-                .WithOne(endereco => endereco.Orcamento)
-                .HasForeignKey<Orcamento>(orcamento => orcamento.IdEndereco)
+                .WithMany(endereco => endereco.Orcamento)
+                .HasForeignKey(orcamento => orcamento.IdEndereco)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Orcamento>()

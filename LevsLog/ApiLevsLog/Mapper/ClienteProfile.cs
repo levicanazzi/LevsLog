@@ -51,7 +51,7 @@ namespace ApiLevsLog.Mapper
 
         public static Cliente UpdateClientes(UpdateCliente clienteDto, Cliente cliente)
         {
-            
+
             cliente.Nome = clienteDto.Nome;
             cliente.Sobrenome = clienteDto.Sobrenome;
             cliente.Email = clienteDto.Email;
@@ -80,6 +80,7 @@ namespace ApiLevsLog.Mapper
                 Id = clienteDto.Id,
                 Nome = clienteDto.Nome,
                 Sobrenome = clienteDto.Sobrenome,
+                DataNascimento = clienteDto.DataNascimento,
                 Email = clienteDto.Email,
                 Endereco = endereco
             };

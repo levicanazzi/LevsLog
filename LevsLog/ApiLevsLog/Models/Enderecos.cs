@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiLevsLog.Models
 {
@@ -11,7 +12,7 @@ namespace ApiLevsLog.Models
         public string Cep { get; set; }
         public string Municipio { get; set; }
         public string Estado { get; set; }        
-        public virtual Orcamento Orcamento { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public virtual List<Orcamento> Orcamento { get; set; }
     }
 }
