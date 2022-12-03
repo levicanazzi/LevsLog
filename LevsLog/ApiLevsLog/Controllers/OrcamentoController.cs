@@ -25,9 +25,9 @@ namespace ApiLevsLog.Controllers
         {
             List<Orcamento> orcamentos = await _dbContext.Orcamentos
                 .Include("Cliente")
-                .Include("Enderecos")
+                .Include("Endereco")
                 .Include("TipoServico")
-                .Include("Produto").ToListAsync();
+                .Include("Produtos").ToListAsync();
 
             if (orcamentos.Count == 0)
             {
@@ -37,6 +37,26 @@ namespace ApiLevsLog.Controllers
             var orcamentosDto = OrcamentoProfile.OrcamentosToReadOrcamentos(orcamentos);
 
             return Ok(orcamentosDto);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrcamentoById(int id)
+        {
+            Orcamento orcamento = await _dbContext.Orcamentos
+                .Include("Cliente")
+                .Include("Endereco")
+                .Include("TipoServico")
+                .Include("Produtos")
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (orcamento == null)
+            {
+                return NotFound();
+            }
+
+            var orcamentoDto = OrcamentoProfile.ReadOrcamentoById(orcamento);
+
+            return Ok(orcamentoDto);
         }
 
         [HttpPost]
