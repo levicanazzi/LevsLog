@@ -15,10 +15,6 @@ namespace ApiLevsLog.Mapper
                 enderecosDto.Add(new ReadEndereco()
                 {
                     Id = endereco.Id,
-                    //Nome = endereco.Cliente.Nome,
-                    //Sobrenome = endereco.Cliente.Sobrenome,
-                    //Email = endereco.Cliente.Email,
-                    //DataNascimento = endereco.Cliente.DataNascimento,
                     Logradouro = endereco.Logradouro,
                     Numero = endereco.Numero,
                     Cep = endereco.Cep,

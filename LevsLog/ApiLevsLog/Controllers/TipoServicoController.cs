@@ -1,5 +1,7 @@
 ﻿using ApiLevsLog.Data;
+using ApiLevsLog.Mapper;
 using ApiLevsLog.Models;
+using ApiLevsLog.Models.Dtos.TipoServico;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +31,9 @@ namespace ApiLevsLog.Controllers
                 return NotFound();
             }
 
-            return Ok(tipoServicos);
+            var tipoServicosDto = TipoServicoProfile.ReadingTipoServicos(tipoServicos);
+
+            return Ok(tipoServicosDto);
         }
     }
 }
