@@ -1,6 +1,7 @@
 ﻿using ApiLevsLog.Data;
 using ApiLevsLog.Mapper;
 using ApiLevsLog.Models;
+using ApiLevsLog.Models.Dtos.OrcamentoDtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +67,30 @@ namespace ApiLevsLog.Controllers
             await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetOrcamento), new { id = orcamento.Id }, orcamento);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpOrcamento(int id, [FromBody] UpdateOrcamento orcamentoDto)
+        {
+            var orcamento = await _dbContext.Orcamentos
+                .Include("Cliente")
+                .Include("Endereco")
+                .Include("TipoServico")
+                .Include("Produtos")
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (orcamento == null)
+            {
+                return NotFound();
+            }
+
+            orcamento = OrcamentoProfile.UpdateOrcamentos(orcamentoDto, orcamento);
+
+            await _dbContext.SaveChangesAsync();
+
+            var orcamentoReadDto = OrcamentoProfile.ReadOrcamentoById(orcamento);
+
+            return Ok(orcamentoReadDto);
         }
 
         [HttpDelete("{id}")]
