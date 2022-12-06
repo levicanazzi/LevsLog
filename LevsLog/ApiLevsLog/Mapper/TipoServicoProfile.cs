@@ -20,5 +20,16 @@ namespace ApiLevsLog.Mapper
             }
             return tipoServicosDto;
         }
+
+        public static ReadTipoServico ReadTipoServicoById(TipoServico tipoServico)
+        {
+            ReadTipoServico tipoServicosDto = new ReadTipoServico()
+            {
+                Id = tipoServico.Id,
+                Servico = tipoServico.Servico
+            };
+
+            return tipoServicosDto;
+        }
     }
 }

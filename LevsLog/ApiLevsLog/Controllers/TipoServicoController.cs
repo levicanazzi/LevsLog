@@ -35,5 +35,20 @@ namespace ApiLevsLog.Controllers
 
             return Ok(tipoServicosDto);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTipoServicoById(int id)
+        {
+            TipoServico tipoServico = await _dbContext.TipoServicos.FirstOrDefaultAsync(e => e.Id == id);
+
+            if (tipoServico == null)
+            {
+                return NotFound();
+            }
+
+            var tipoServicoDto = TipoServicoProfile.ReadTipoServicoById(tipoServico);
+
+            return Ok(tipoServicoDto);
+        }
     }
 }
