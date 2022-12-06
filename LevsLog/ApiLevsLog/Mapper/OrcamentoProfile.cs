@@ -20,6 +20,7 @@ namespace ApiLevsLog.Mapper
                     Nome = orcamento.Cliente.Nome,
                     Sobrenome = orcamento.Cliente.Sobrenome,
                     Email = orcamento.Cliente.Email,
+                    DataNascimento = orcamento.Cliente.DataNascimento,
                     IdTipoServico = orcamento.IdTipoServico,
                     Servico = orcamento.TipoServico.Servico,
                     IdEndereco = orcamento.IdEndereco,
@@ -44,6 +45,7 @@ namespace ApiLevsLog.Mapper
             orcamentoDto.Nome = orcamento.Cliente.Nome;
             orcamentoDto.Sobrenome = orcamento.Cliente.Sobrenome;
             orcamentoDto.Email = orcamento.Cliente.Email;
+            orcamentoDto.DataNascimento = orcamento.Cliente.DataNascimento;
             orcamentoDto.IdEndereco = orcamento.IdEndereco;
             orcamentoDto.Logradouro = orcamento.Endereco.Logradouro;
             orcamentoDto.Numero = orcamento.Endereco.Numero;
