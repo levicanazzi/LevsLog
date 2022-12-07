@@ -31,7 +31,7 @@ namespace ApiLevsLog.Controllers
                 return NotFound();
             }
 
-            var tipoServicosDto = TipoServicoProfile.ReadingTipoServicos(tipoServicos);
+            var tipoServicosDto = TipoServicoProfile.ReadTipoServicos(tipoServicos);
 
             return Ok(tipoServicosDto);
         }
@@ -49,6 +49,18 @@ namespace ApiLevsLog.Controllers
             var tipoServicoDto = TipoServicoProfile.ReadTipoServicoById(tipoServico);
 
             return Ok(tipoServicoDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddTipoServico([FromBody] AddTipoServico tipoServicoDto)
+        {
+            var tipoServico = TipoServicoProfile.AddTipoServico(tipoServicoDto);
+
+            await _dbContext.TipoServicos.AddAsync(tipoServico);
+            await _dbContext.SaveChangesAsync();
+
+            var readTipoServicoDto = TipoServicoProfile.ReadTipoServicoById(tipoServico);
+            return CreatedAtAction(nameof(GetTipoServico), new { id = readTipoServicoDto.Id }, readTipoServicoDto);
         }
     }
 }
