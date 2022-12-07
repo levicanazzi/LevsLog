@@ -62,5 +62,24 @@ namespace ApiLevsLog.Controllers
             var readTipoServicoDto = TipoServicoProfile.ReadTipoServicoById(tipoServico);
             return CreatedAtAction(nameof(GetTipoServico), new { id = readTipoServicoDto.Id }, readTipoServicoDto);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTipoServico(int id, [FromBody] UpdateTipoServico tipoServicoDto)
+        {
+            var tipoServico = await _dbContext.TipoServicos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (tipoServico == null)
+            {
+                NotFound();
+            }
+
+            tipoServico = TipoServicoProfile.UpdateTipoServico(tipoServicoDto, tipoServico);
+
+            await _dbContext.SaveChangesAsync();
+
+            var readTipoServicoDto = TipoServicoProfile.ReadTipoServicoById(tipoServico);
+
+            return Ok(readTipoServicoDto);
+        }
     }
 }

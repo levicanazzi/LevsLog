@@ -42,5 +42,11 @@ namespace ApiLevsLog.Mapper
 
             return tipoServico;
         }
+        public static TipoServico UpdateTipoServico(UpdateTipoServico tipoServicoDto, TipoServico tipoServico)
+        {
+            tipoServico.Servico = tipoServicoDto.Servico;
+
+            return tipoServico;
+        }
     }
 }
