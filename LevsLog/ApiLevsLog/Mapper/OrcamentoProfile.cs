@@ -1,5 +1,6 @@
 ﻿using ApiLevsLog.Models;
 using ApiLevsLog.Models.Dtos.OrcamentoDtos;
+using ApiLevsLog.Models.Dtos.ProdutoDtos;
 using System.Collections.Generic;
 
 namespace ApiLevsLog.Mapper
@@ -12,6 +13,18 @@ namespace ApiLevsLog.Mapper
 
             foreach (var orcamento in orcamentos)
             {
+                List<ProdutoOrcamentoDto> produtos = new List<ProdutoOrcamentoDto>();
+                foreach (var prod in orcamento.Produtos)
+                {
+                    produtos.Add(new ProdutoOrcamentoDto()
+                    {
+                        Altura = prod.Altura,
+                        Largura = prod.Largura,
+                        Comprimento = prod.Comprimento,
+                        Peso = prod.Peso
+                    });
+                }
+
                 orcamentosDto.Add(new ReadOrcamento()
                 {
                     Id = orcamento.Id,
@@ -28,9 +41,10 @@ namespace ApiLevsLog.Mapper
                     Numero = orcamento.Endereco.Numero,
                     Cep = orcamento.Endereco.Cep,
                     Municipio = orcamento.Endereco.Municipio,
-                    Estado = orcamento.Endereco.Estado
-
+                    Estado = orcamento.Endereco.Estado,
+                    ProdutoDto = produtos
                 });
+
             }
 
             return orcamentosDto;
@@ -55,7 +69,56 @@ namespace ApiLevsLog.Mapper
             orcamentoDto.IdTipoServico = orcamento.IdTipoServico;
             orcamentoDto.Servico = orcamento.TipoServico.Servico;
 
+            List<ProdutoOrcamentoDto> produtos = new List<ProdutoOrcamentoDto>();
+            foreach (var prod in orcamento.Produtos)
+            {
+                produtos.Add(new ProdutoOrcamentoDto()
+                {
+                    Altura = prod.Altura,
+                    Largura = prod.Largura,
+                    Comprimento = prod.Comprimento,
+                    Peso = prod.Peso
+                });
+            }
+            orcamentoDto.ProdutoDto = produtos;
+
             return orcamentoDto;
+        }
+        public static Orcamento AddOrcamento(AddOrcamento orcamentoDto)
+        {
+            Enderecos enderecos = new Enderecos()
+            {
+
+                Logradouro = orcamentoDto.Logradouro,
+                Numero = orcamentoDto.Numero,
+                Cep = orcamentoDto.Cep,
+                Municipio = orcamentoDto.Municipio,
+                Estado = orcamentoDto.Estado
+            };
+
+            List<Produto> produtos = new List<Produto>();
+            foreach (var prod in orcamentoDto.ProdutoDto)
+            {
+                produtos.Add(new Produto()
+                {
+                    Altura = prod.Altura,
+                    Largura = prod.Largura,
+                    Peso = prod.Peso,
+                    Comprimento = prod.Comprimento
+                });
+            }
+
+            Orcamento orcamento = new Orcamento()
+            {
+                Id = orcamentoDto.Id,
+                IdCliente = orcamentoDto.IdCliente,
+                IdTipoServico = orcamentoDto.IdTipoServico,
+                Valor = orcamentoDto.Valor,
+                Endereco = enderecos,
+                Produtos = produtos
+            };
+
+            return orcamento;
         }
         public static Orcamento UpdateOrcamentos(UpdateOrcamento orcamentoDto, Orcamento orcamento)
         {

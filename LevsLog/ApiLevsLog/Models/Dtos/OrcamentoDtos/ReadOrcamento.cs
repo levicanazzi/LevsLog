@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ApiLevsLog.Models.Dtos.ProdutoDtos;
+using System;
+using System.Collections.Generic;
 
 namespace ApiLevsLog.Models.Dtos.OrcamentoDtos
 {
@@ -19,5 +21,6 @@ namespace ApiLevsLog.Models.Dtos.OrcamentoDtos
         public string Cep { get; set; }
         public string Municipio { get; set; }
         public string Estado { get; set; }
+        public List<ProdutoOrcamentoDto> ProdutoDto { get; set; }
     }
 }

@@ -61,12 +61,25 @@ namespace ApiLevsLog.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddOrcamento([FromBody] Orcamento orcamento)
+        public async Task<IActionResult> AddOrcamento([FromBody] AddOrcamento orcamentoDto)
         {
+            var orcamento = OrcamentoProfile.AddOrcamento(orcamentoDto);
+
             await _dbContext.Orcamentos.AddAsync(orcamento);
             await _dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetOrcamento), new { id = orcamento.Id }, orcamento);
+            int id = orcamento.Id;
+
+            Orcamento orcamentoPersistido = await _dbContext.Orcamentos
+                .Include("Cliente")
+                .Include("Endereco")
+                .Include("TipoServico")
+                .Include("Produtos")
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            var readOrcamentoDto = OrcamentoProfile.ReadOrcamentoById(orcamentoPersistido);
+
+            return CreatedAtAction(nameof(GetOrcamento), new { id = readOrcamentoDto.Id }, readOrcamentoDto);
         }
 
         [HttpPut("{id}")]
