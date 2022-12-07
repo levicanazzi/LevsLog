@@ -81,5 +81,21 @@ namespace ApiLevsLog.Controllers
 
             return Ok(readTipoServicoDto);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletarTipoServico(int id)
+        {
+            var tipoServico = await _dbContext.TipoServicos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (tipoServico == null)
+            {
+                NotFound();
+            }
+
+            _dbContext.Remove(tipoServico);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
