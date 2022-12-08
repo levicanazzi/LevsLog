@@ -53,5 +53,15 @@ namespace ApiLevsLog.Mapper
 
             return produto;
         }
+
+        public static Produto UpdateProdutos(UpdateProduto produtoDto, Produto produto)
+        {
+            produto.IdOrcamento = produtoDto.IdOrcamento;
+            produto.Altura = produtoDto.Altura;
+            produto.Largura = produtoDto.Largura;
+            produto.Comprimento = produtoDto.Comprimento;
+
+            return produto;
+        }
     }
 }

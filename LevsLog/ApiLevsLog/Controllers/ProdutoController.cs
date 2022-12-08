@@ -63,5 +63,26 @@ namespace ApiLevsLog.Controllers
 
             return CreatedAtAction(nameof(GetProdutos), new { id = readProdutoDto.Id }, readProdutoDto);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpProduto(int id, [FromBody] UpdateProduto produtoDto)
+        {
+            var produto = await _dbContext.Produtos
+                .Include("Orcamento")
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (produto == null)
+            {
+                return NotFound();
+            }
+
+            produto = ProdutoProfile.UpdateProdutos(produtoDto, produto);
+
+            await _dbContext.SaveChangesAsync();
+
+            var readProdutoDto = ProdutoProfile.ReadProdutoById(produto);
+
+            return Ok(readProdutoDto);
+        }
     }
 }
