@@ -34,5 +34,20 @@ namespace ApiLevsLog.Controllers
 
             return Ok(produtosDto);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProdutoById(int id)
+        {
+            var produto = await _dbContext.Produtos.Include("Orcamento").FirstOrDefaultAsync(x => x.Id == id);
+
+            if (produto == null)
+            {
+                NotFound();
+            }
+
+            var produtoDto = ProdutoProfile.ReadProdutoById(produto);
+
+            return Ok(produtoDto);
+        }
     }
 }
