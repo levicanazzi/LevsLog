@@ -1,5 +1,6 @@
 ﻿using ApiLevsLog.Data;
 using ApiLevsLog.Mapper;
+using ApiLevsLog.Models.Dtos.ProdutoDtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,19 @@ namespace ApiLevsLog.Controllers
             var produtoDto = ProdutoProfile.ReadProdutoById(produto);
 
             return Ok(produtoDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProduto([FromBody] AddProduto produtoDto)
+        {
+            var produto = ProdutoProfile.AddProduto(produtoDto);
+
+            await _dbContext.Produtos.AddAsync(produto);
+            await _dbContext.SaveChangesAsync();
+
+            var readProdutoDto = ProdutoProfile.ReadProdutoById(produto);
+
+            return CreatedAtAction(nameof(GetProdutos), new { id = readProdutoDto.Id }, readProdutoDto);
         }
     }
 }
