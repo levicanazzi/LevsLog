@@ -84,5 +84,21 @@ namespace ApiLevsLog.Controllers
 
             return Ok(readProdutoDto);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletarProduto(int id)
+        {
+            var produto = await _dbContext.Produtos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (produto == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Remove(produto);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
