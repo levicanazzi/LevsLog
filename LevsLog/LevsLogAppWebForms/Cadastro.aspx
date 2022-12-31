@@ -20,12 +20,51 @@
             </div>
             <div class="col-md-3">
                 <div class="input-group mb-3">
-                    <span class="input-group-text">Nascimento</span>
-                    <asp:TextBox ID="TxtDataNascimento" runat="server" CssClass="form-control" />
+                    <span class="input-group-text">Email</span>
+                    <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" />
                 </div>
             </div>
         </div>
-
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Data de Nascimento</span>
+                    <asp:TextBox ID="TxtDataNascimento" runat="server" CssClass="form-control" />
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Endereço</span>
+                    <asp:TextBox ID="TxtEndereco" runat="server" CssClass="form-control" />
+                </div>
+            </div>            
+            <div class="col-md-2">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Numero</span>
+                    <asp:TextBox ID="TxtNumero" runat="server" CssClass="form-control" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Cep</span>
+                    <asp:TextBox ID="TxtCep" runat="server" CssClass="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">            
+            <div class="col-md-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Estado</span>
+                    <asp:TextBox ID="TxtEstado" runat="server" CssClass="form-control" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Municipio</span>
+                    <asp:TextBox ID="TxtMunicipio" runat="server" CssClass="form-control" />
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="d-grid gap-2">

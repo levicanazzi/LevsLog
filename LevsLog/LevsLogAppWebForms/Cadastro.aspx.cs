@@ -20,12 +20,25 @@ namespace LevsLogAppWebForms
             string nome = TxtNome.Text;
             string sobrenome = TxtSobrenome.Text;
             DateTime dataNascimento = DateTime.Parse(TxtDataNascimento.Text);
+            string email = TxtEmail.Text;
+            string endereco = TxtEndereco.Text;
+            string numero = TxtNumero.Text;
+            string cep = TxtCep.Text;
+            string municipio = TxtMunicipio.Text;
+            string estado = TxtEstado.Text;
+
 
             Cliente cliente = new Cliente()
             {
                 Nome= nome,
                 Sobrenome= sobrenome,
-                DataNascimento= dataNascimento
+                DataNascimento= dataNascimento,
+                Email = email,
+                Endereco = endereco,
+                Numero = numero,
+                Cep = cep,
+                Municipio = municipio,
+                Estado = estado
             };
 
             // montar o json e enviar pra api
