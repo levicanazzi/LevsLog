@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,6 +12,8 @@ namespace LevsLogAppWebForms
 {
     public partial class Cadastro : System.Web.UI.Page
     {
+        private readonly Api api = new Api();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -30,16 +34,26 @@ namespace LevsLogAppWebForms
 
             Cliente cliente = new Cliente()
             {
-                Nome= nome,
-                Sobrenome= sobrenome,
-                DataNascimento= dataNascimento,
+                Nome = nome,
+                Sobrenome = sobrenome,
+                DataNascimento = dataNascimento,
                 Email = email,
-                Endereco = endereco,
+                Logradouro = endereco,
                 Numero = numero,
                 Cep = cep,
                 Municipio = municipio,
                 Estado = estado
             };
+
+            try
+            {
+                api.PostCliente(cliente, HttpMethod.Post);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
 
             // montar o json e enviar pra api
         }

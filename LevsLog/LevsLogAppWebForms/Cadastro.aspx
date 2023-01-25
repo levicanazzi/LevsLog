@@ -7,17 +7,20 @@
         <h3 class="text-center">Cadastre o Cliente</h3>
         <div class="row mt-4">
             <div class="col-md-3">
-                <div class="col mb-3">
+                <div class="input-group col mb-3">
+                    <span class="input-group-text" id="TxtNome">Nome</span>
                     <asp:TextBox ID="TxtNome" runat="server" CssClass="form-control" placeholder="Primeiro Nome" aria-label="First name" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-group mb-3">
+                    <span class="input-group-text" id="TxtSobrenome">Sobrenome</span>
                     <asp:TextBox ID="TxtSobrenome" runat="server" CssClass="form-control" placeholder="Sobrenome" aria-label="Last Name" />
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="input-group mb-3">
+                    <span class="input-group-text" id="TxtEmail">Email</span>
                     <asp:TextBox ID="TxtEmail" runat="server" CssClass="form-control" placeholder="Email" aria-label="Email" />
                 </div>
             </div>
@@ -25,34 +28,40 @@
         <div class="row mt-3">
             <div class="col-md-3">
                 <div class="input-group mb-3">
-                    <asp:TextBox ID="TxtDataNascimento" runat="server" CssClass="form-control" placeholder="Data de Nascimento" aria-label="Data de Nascimento"  />
+                    <span class="input-group-text" id="TxtDataNascimento">Data de Nascimento</span>
+                    <asp:TextBox ID="TxtDataNascimento" runat="server" CssClass="form-control" placeholder="Data de Nascimento" aria-label="Data de Nascimento" />
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="input-group mb-3">
+                    <span class="input-group-text" id="TxtEndereco">Endereço</span>
                     <asp:TextBox ID="TxtEndereco" runat="server" CssClass="form-control" placeholder="Endereço" aria-label="Endereco" />
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="input-group mb-3">
+                    <span class="input-group-text" id="TxtNumero">Numero</span>
                     <asp:TextBox ID="TxtNumero" runat="server" CssClass="form-control" placeholder="Numero" aria-label="Numero" />
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="input-group mb-3">
-                    <asp:TextBox ID="TxtCep" runat="server" CssClass="form-control" placeholder="Cep" aria-label="Cep" />
+                    <span class="input-group-text" id="TxtCep">CEP</span>
+                    <asp:TextBox ID="TxtCep" runat="server" CssClass="form-control" placeholder="CEP" aria-label="Cep" />
                 </div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-md-3">
                 <div class="input-group mb-3">
+                    <span class="input-group-text" id="TxtEstado">Estado</span>
                     <asp:TextBox ID="TxtEstado" runat="server" CssClass="form-control" placeholder="Estado" aria-label="Estado" />
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="input-group mb-3">
-                    <asp:TextBox ID="TxtMunicipio" runat="server" CssClass="form-control" placeholder="Municipio" aria-label="Municipio" />
+                    <span class="input-group-text" id="TxtMunicipio">Município</span>
+                    <asp:TextBox ID="TxtMunicipio" runat="server" CssClass="form-control" placeholder="Município" aria-label="Municipio" />
                 </div>
             </div>
         </div>

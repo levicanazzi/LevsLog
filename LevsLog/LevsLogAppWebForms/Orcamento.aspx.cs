@@ -12,7 +12,11 @@ namespace LevsLogAppWebForms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                List<Produto> produtos = new List<Produto>();
+                Session["Produtos"] = produtos;
+            }
         }
 
         protected void BtnCadastrar_Click(object sender, EventArgs e)
@@ -43,6 +47,32 @@ namespace LevsLogAppWebForms
                 Comprimento = comprimento,
                 Peso = peso
             };
+        }
+
+        protected void BtnAdicionarProduto_Click(object sender, EventArgs e)
+        {
+            string nome = TxtNomeProduto.Text;
+            double largura = double.Parse(TxtLargura.Text);
+            double altura = double.Parse(TxtAltura.Text);
+            double comprimento = double.Parse(TxtComprimento.Text);
+            double peso = double.Parse(TxtPeso.Text);
+
+            Produto produto = new Produto()
+            {
+                Nome = nome,
+                Largura = largura,
+                Altura = altura,
+                Comprimento = comprimento,
+                Peso = peso
+            };
+
+            var lstProdutos = (List<Produto>)Session["Produtos"];
+            lstProdutos.Add(produto);
+            Session["Produtos"] = lstProdutos;
+
+            GvProdutos.DataSource = lstProdutos;
+            GvProdutos.DataBind();
+            
         }
     }
 }
