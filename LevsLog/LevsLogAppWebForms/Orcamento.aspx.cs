@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,6 +11,7 @@ namespace LevsLogAppWebForms
 {
     public partial class Orcamento : System.Web.UI.Page
     {
+        private readonly Api api = new Api();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -28,10 +30,8 @@ namespace LevsLogAppWebForms
             string cep = TxtCep.Text;
             string municipio = TxtMunicipio.Text;
             string estado = TxtEstado.Text;
-            double largura = double.Parse(TxtLargura.Text);
-            double altura = double.Parse(TxtAltura.Text);
-            double comprimento = double.Parse(TxtComprimento.Text);
-            double peso = double.Parse(TxtPeso.Text);
+
+            var lstProdutos = (List<Produto>)Session["Produtos"];
 
             Orcamentos orcamento = new Orcamentos()
             {
@@ -42,11 +42,18 @@ namespace LevsLogAppWebForms
                 Cep = cep,
                 Estado = estado,
                 Municipio = municipio,
-                Altura = altura,
-                Largura = largura,
-                Comprimento = comprimento,
-                Peso = peso
-            };
+                Produtos = lstProdutos
+            };            
+
+            try
+            {
+                api.PostOrcamento(orcamento, HttpMethod.Post);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         protected void BtnAdicionarProduto_Click(object sender, EventArgs e)
@@ -72,7 +79,7 @@ namespace LevsLogAppWebForms
 
             GvProdutos.DataSource = lstProdutos;
             GvProdutos.DataBind();
-            
+
         }
     }
 }

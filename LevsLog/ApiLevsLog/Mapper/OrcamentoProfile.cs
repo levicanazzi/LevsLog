@@ -97,7 +97,7 @@ namespace ApiLevsLog.Mapper
             };
 
             List<Produto> produtos = new List<Produto>();
-            foreach (var prod in orcamentoDto.ProdutoDto)
+            foreach (var prod in orcamentoDto.Produtos)
             {
                 produtos.Add(new Produto()
                 {

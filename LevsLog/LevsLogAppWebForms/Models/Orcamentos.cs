@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web;
 
 namespace LevsLogAppWebForms.Models
@@ -16,9 +17,6 @@ namespace LevsLogAppWebForms.Models
         public string Estado { get; set; }
         public string Municipio { get; set; }
         public double Valor { get; set; }
-        public double Altura { get; set; }
-        public double Largura { get; set; }
-        public double Comprimento { get; set; }
-        public double Peso { get; set; }
+        public List<Produto> Produtos { get; set; }
     }
 }

@@ -91,6 +91,25 @@ namespace LevsLogAppWebForms
                 else { return null; }
             }
         }
+        public async Task<Orcamento> PostOrcamento(Orcamentos data, HttpMethod method)
+        {
+            HttpClient orcamento = new HttpClient();
+            orcamento.DefaultRequestHeaders
+                 .Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            using (var requestMessage = new HttpRequestMessage(method, $"{ApiUrl}orcamento"))
+            {
+                await SetContent(data, requestMessage);
+
+                var response = await orcamento.SendAsync(requestMessage).ConfigureAwait(false);
+                var obj = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await Task.FromResult(JsonConvert.DeserializeObject<Orcamento>(obj, JsonSettings)).ConfigureAwait(false);
+                }
+                else { return null; }
+            }
+        }
 
         //public async Task<Cliente> PutCliente(int id, Cliente data, HttpMethod method)
         //{
@@ -140,18 +159,18 @@ namespace LevsLogAppWebForms
             }
         }
 
-        //private async Task<T> ProcessResponse<T>(WebResponse response)
-        //{
-        //    if (((HttpWebResponse)response).StatusCode == HttpStatusCode.OK)
-        //    {
-        //        Stream receiveStream = response.GetResponseStream();
-        //        StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
-        //        var data = readStream.ReadToEnd();
-        //        receiveStream.Dispose();
-        //        readStream.Dispose();
-        //        return await Task.FromResult(JsonConvert.DeserializeObject<T>(data, JsonSettings)).ConfigureAwait(false);
-        //    }
-        //    throw new Exception("Não foi possível fazer a consulta. Tente novamente.");
-        //}
+        private async Task<T> ProcessResponse<T>(WebResponse response)
+        {
+            if (((HttpWebResponse)response).StatusCode == HttpStatusCode.OK)
+            {
+                Stream receiveStream = response.GetResponseStream();
+                StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
+                var data = readStream.ReadToEnd();
+                receiveStream.Dispose();
+                readStream.Dispose();
+                return await Task.FromResult(JsonConvert.DeserializeObject<T>(data, JsonSettings)).ConfigureAwait(false);
+            }
+            throw new Exception("Não foi possível fazer a consulta. Tente novamente.");
+        }
     }
 }

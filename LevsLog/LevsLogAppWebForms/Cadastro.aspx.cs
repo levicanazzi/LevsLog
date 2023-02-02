@@ -53,9 +53,6 @@ namespace LevsLogAppWebForms
             {
                 throw new Exception(ex.Message);
             }
-
-
-            // montar o json e enviar pra api
         }
     }
 }

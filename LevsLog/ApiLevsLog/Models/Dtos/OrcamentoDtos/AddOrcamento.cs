@@ -15,6 +15,6 @@ namespace ApiLevsLog.Models.Dtos.OrcamentoDtos
         public string Cep { get; set; }
         public string Municipio { get; set; }
         public string Estado { get; set; }
-        public List<ProdutoOrcamentoDto> ProdutoDto { get; set; }
+        public List<ProdutoOrcamentoDto> Produtos { get; set; }
     }
 }
