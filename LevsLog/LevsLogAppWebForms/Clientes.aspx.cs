@@ -38,11 +38,17 @@ namespace LevsLogAppWebForms
         protected void BtnExcluirCliente_Command(object sender, CommandEventArgs e)
         {
             int idCliente = int.Parse(e.CommandArgument.ToString());
+            HdnIdClienteExclusao.Value = idCliente.ToString();
 
-            //ScriptManager.RegisterStartupScript(this, GetType(), "myModal", "openModal();", true);
-            ScriptManager.RegisterStartupScript(this, GetType(), "Pop", ";function modal2(){openModal();};", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "Pop", "openModal();", true);
 
-            //Response.Redirect($"Cadastro.aspx?cliente={idCliente}");
+        }
+
+        protected void BtnConfirmarExclusao_Command(object sender, CommandEventArgs e)
+        {
+            int idCliente = int.Parse(HdnIdClienteExclusao.Value);
+
+            // chama api de exclusao
         }
     }
 }
