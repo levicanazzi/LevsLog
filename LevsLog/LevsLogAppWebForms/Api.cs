@@ -19,59 +19,60 @@ namespace LevsLogAppWebForms
         private readonly string ApiUrl = System.Configuration.ConfigurationManager.AppSettings["api"];
 
 
-        //public async Task<Cliente> GetCliente(int id)
-        //{
-        //    WebResponse response;
-        //    string endPoint = ApiUrl + id;
-        //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
-        //    request.ContentType = "application/json";
-        //    request.Accept = "application/json";
-        //    try
-        //    {
-        //        response = await request.GetResponseAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+        public async Task<Cliente> GetCliente(int id)
+        {
+            WebResponse response;
+            string endPoint = $"{ApiUrl}cliente/" + id;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            try
+            {
+                response = await request.GetResponseAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    if (((HttpWebResponse)response).StatusCode == HttpStatusCode.OK)
-        //    {
-        //        var end = await ProcessResponse<Cliente>(response);
-        //        return end;
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Não foi possivel buscar o cep.");
-        //    }
-        //}
+            if (((HttpWebResponse)response).StatusCode == HttpStatusCode.OK)
+            {
+                var end = await ProcessResponse<Cliente>(response);
+                return end;
+            }
+            else
+            {
+                throw new Exception("Não foi possivel buscar o cep.");
+            }
+        }
 
-        //public async Task<List<Cliente>> GetClientes()
-        //{
-        //    WebResponse response;
-        //    string endPoint = ApiUrl;
-        //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
-        //    request.ContentType = "application/json";
-        //    request.Accept = "application/json";
-        //    try
-        //    {
-        //        response = await request.GetResponseAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+        public async Task<List<Cliente>> GetClientes()
+        {
+            WebResponse response;
+            string endPoint = $"{ApiUrl}cliente";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            try
+            {
+                response = await request.GetResponseAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    if (((HttpWebResponse)response).StatusCode == HttpStatusCode.OK)
-        //    {
-        //        var end = await ProcessResponse<List<Cliente>>(response);
-        //        return end;
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Não foi possivel buscar o cep.");
-        //    }
-        //}
+            if (((HttpWebResponse)response).StatusCode == HttpStatusCode.OK)
+            {
+                var end = await ProcessResponse<List<Cliente>>(response);
+                return end;
+            }
+            else
+            {
+                throw new Exception("Não foi possivel buscar o cep.");
+            }
+        }
+
         public async Task<Cliente> PostCliente(Cliente data, HttpMethod method)
         {
             HttpClient client = new HttpClient();
@@ -111,25 +112,25 @@ namespace LevsLogAppWebForms
             }
         }
 
-        //public async Task<Cliente> PutCliente(int id, Cliente data, HttpMethod method)
-        //{
-        //    HttpClient client = new HttpClient();
-        //    client.DefaultRequestHeaders
-        //         .Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //    using (var requestMessage = new HttpRequestMessage(method, $"{ApiUrl}{id}"))
-        //    {
-        //        await SetContent(data, requestMessage);
+        public async Task<Cliente> PutCliente(int id, Cliente data, HttpMethod method)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders
+                 .Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            using (var requestMessage = new HttpRequestMessage(method, $"{ApiUrl}cliente/{id}"))
+            {
+                await SetContent(data, requestMessage);
 
-        //        var response = await client.SendAsync(requestMessage).ConfigureAwait(false);
-        //        var obj = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var response = await client.SendAsync(requestMessage).ConfigureAwait(false);
+                var obj = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            return await Task.FromResult(JsonConvert.DeserializeObject<Cliente>(obj, JsonSettings)).ConfigureAwait(false);
-        //        }
-        //        else { return null; }
-        //    }
-        //}
+                if (response.IsSuccessStatusCode)
+                {
+                    return await Task.FromResult(JsonConvert.DeserializeObject<Cliente>(obj, JsonSettings)).ConfigureAwait(false);
+                }
+                else { return null; }
+            }
+        }
 
         //public async Task<Cliente> DeleteCliente(int id, HttpMethod method)
         //{

@@ -24,7 +24,7 @@
 
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="Home.aspx" class="nav-link" aria-current="page">Home</a></li>
-                    <li class="nav-item"><a href="Cadastro.aspx" class="nav-link">Cadastrar um Cliente</a></li>
+                    <li class="nav-item"><a href="Clientes.aspx" class="nav-link">Nossos Clientes</a></li>
                     <li class="nav-item"><a href="Orcamento.aspx" class="nav-link">Solicitar um Orcamento</a></li>
                 </ul>
             </header>
