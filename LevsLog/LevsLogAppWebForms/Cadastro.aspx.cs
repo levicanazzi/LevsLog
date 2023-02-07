@@ -48,13 +48,13 @@ namespace LevsLogAppWebForms
         }
 
         #region CadastroNovo
-        protected void BtnCadastrar_Click(object sender, EventArgs e)
+        protected async void BtnCadastrar_Click(object sender, EventArgs e)
         {
             Cliente cliente = GerarCliente();
 
             try
             {
-                api.PostCliente(cliente, HttpMethod.Post);
+                await api.PostCliente(cliente, HttpMethod.Post);
             }
             catch (Exception ex)
             {
@@ -82,12 +82,12 @@ namespace LevsLogAppWebForms
             TxtEstado.Text = cliente.Estado;
         }
 
-        protected void BtnEditar_Click(object sender, EventArgs e)
+        protected async void BtnEditar_Click(object sender, EventArgs e)
         {
             int idCliente = int.Parse(HdnIdCliente.Value);
             Cliente cliente = GerarCliente();         
 
-            api.PutCliente(idCliente, cliente, HttpMethod.Put);
+            await api.PutCliente(idCliente, cliente, HttpMethod.Put);
 
             Response.Redirect("clientes.aspx");
         }
