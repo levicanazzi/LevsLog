@@ -132,23 +132,24 @@ namespace LevsLogAppWebForms
             }
         }
 
-        //public async Task<Cliente> DeleteCliente(int id, HttpMethod method)
-        //{
-        //    HttpClient client = new HttpClient();
-        //    client.DefaultRequestHeaders
-        //         .Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //    using (var requestMessage = new HttpRequestMessage(method, $"{ApiUrl}{id}"))
-        //    {
-        //        var response = await client.SendAsync(requestMessage).ConfigureAwait(false);
-        //        var obj = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        public async Task<Cliente> DeleteCliente(int id, HttpMethod method)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders
+                 .Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            using (var requestMessage = new HttpRequestMessage(method, $"{ApiUrl}cliente/{id}"))
+            {
+                var response = await client.SendAsync(requestMessage).ConfigureAwait(false);
+                var obj = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            return await Task.FromResult(JsonConvert.DeserializeObject<Cliente>(obj, JsonSettings)).ConfigureAwait(false);
-        //        }
-        //        else { return null; }
-        //    }
-        //}
+                if (response.IsSuccessStatusCode)
+                {
+                    return await Task.FromResult(JsonConvert.DeserializeObject<Cliente>(obj, JsonSettings)).ConfigureAwait(false);
+                }
+                else 
+                { return null; }
+            }
+        }
 
         private async Task SetContent(object data, HttpRequestMessage requestMessage)
         {

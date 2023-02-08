@@ -52,14 +52,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <asp:HiddenField ID="HdnIdClienteExclusao" runat="server" />
+                    
                     Tem certeza que deseja deletar esse cliente?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     <asp:Button ID="BtnConfirmarExclusao" runat="server" Text="Confirmar" CssClass="btn btn-danger" OnCommand="BtnConfirmarExclusao_Command" />
                 </div>
-            </div>
+            </div><asp:HiddenField ID="HdnIdClienteExclusao" runat="server" />
         </div>
     </div>
 

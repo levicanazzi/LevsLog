@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -44,11 +45,13 @@ namespace LevsLogAppWebForms
 
         }
 
-        protected void BtnConfirmarExclusao_Command(object sender, CommandEventArgs e)
+        protected async void BtnConfirmarExclusao_Command(object sender, CommandEventArgs e)
         {
             int idCliente = int.Parse(HdnIdClienteExclusao.Value);
 
-            // chama api de exclusao
+            await api.DeleteCliente(idCliente, HttpMethod.Delete);
+
+            Response.Redirect("clientes.aspx");
         }
     }
 }
