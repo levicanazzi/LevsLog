@@ -49,7 +49,15 @@ namespace LevsLogAppWebForms
         {
             int idCliente = int.Parse(HdnIdClienteExclusao.Value);
 
-            await api.DeleteCliente(idCliente, HttpMethod.Delete);
+            try
+            {
+                await api.DeleteCliente(idCliente, HttpMethod.Delete);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Pop", $"Alert('{ex.Message}');", true);
+            }
+
 
             Response.Redirect("clientes.aspx");
         }

@@ -86,15 +86,17 @@ namespace ApiLevsLog.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarCliente(int id)
         {
-            Cliente cliente = await _dbContext.Clientes.FirstOrDefaultAsync(x => x.Id == id);
+            Cliente cliente = await _dbContext.Clientes.Include("Orcamentos").FirstOrDefaultAsync(x => x.Id == id);
 
             if (cliente == null)
             {
                 return NotFound();
             }
 
-            _dbContext.Remove(cliente);
-            await _dbContext.SaveChangesAsync();
+            if (cliente.Orcamentos.Count > 0)
+            {
+                return BadRequest("O cliente possui orçamentos em aberto.");
+            }
 
             return Ok();
         }

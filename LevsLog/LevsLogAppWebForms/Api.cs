@@ -146,6 +146,10 @@ namespace LevsLogAppWebForms
                 {
                     return await Task.FromResult(JsonConvert.DeserializeObject<Cliente>(obj, JsonSettings)).ConfigureAwait(false);
                 }
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    return new Exception("O cliente possui orçamentos em aberto.");
+                }
                 else 
                 { return null; }
             }
